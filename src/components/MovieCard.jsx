@@ -1,12 +1,11 @@
-import { useMoveContext } from "../contexts/MovieContext";
+import { useMovieContext } from "../contexts/MovieContext";
 import "../css/MovieCard.css";
 
 export const MovieCard = ({ movie }) => {
-  const { isFavorite, addToFavorites, removeFromFavorites } = useMoveContext();
+  const { isFavorite, addToFavorites, removeFromFavorites } = useMovieContext();
   const favorite = isFavorite(movie.id);
 
   function onFavoriteClick(e) {
-    console.log("favorite", favorite);
     e.preventDefault();
     if (favorite) removeFromFavorites(movie.id);
     else addToFavorites(movie);
