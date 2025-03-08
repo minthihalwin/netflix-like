@@ -1,7 +1,16 @@
+import { useMoveContext } from "../contexts/MovieContext";
 import "../css/MovieCard.css";
 
 export const MovieCard = ({ movie }) => {
-  function onFavoriteClick() {}
+  const { isFavorite, addToFavorites, removeFromFavorites } = useMoveContext();
+  const favorite = isFavorite(movie.id);
+
+  function onFavoriteClick(e) {
+    console.log("favorite", favorite);
+    e.preventDefault();
+    if (favorite) removeFromFavorites(movie.id);
+    else addToFavorites(movie);
+  }
   return (
     <div className="movie-card">
       <div className="movie-poster">
@@ -10,7 +19,10 @@ export const MovieCard = ({ movie }) => {
           alt={movie.title}
         />
         <div className="movie-overlay">
-          <button className="favorite-btn" onClick={onFavoriteClick}>
+          <button
+            className={`favorite-btn ${favorite ? "active" : ""}`}
+            onClick={onFavoriteClick}
+          >
             ♥
           </button>
         </div>
